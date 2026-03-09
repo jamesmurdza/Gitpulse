@@ -168,14 +168,14 @@ export default function UserProfile({ username }: { username: string }) {
                 {profile.topRepositories.map((repo) => {
                   const percent = Math.round((repo.userPRs / repo.totalPRs) * 100) || 0;
                   return (
-                    <tr key={`${repo.ownerLogin}/${repo.name}`} className="hover:bg-gray-800/30 transition-colors">
+                    <tr key={`${repo.ownerLogin || username}/${repo.name}`} className="hover:bg-gray-800/30 transition-colors">
                       <td className="px-6 py-4">
                         <Link
-                          href={`https://github.com/${repo.ownerLogin}/${repo.name}`}
+                          href={`https://github.com/${repo.ownerLogin || username}/${repo.name}`}
                           target="_blank"
                           className="text-white font-medium hover:text-green-400 transition-colors"
                         >
-                          {repo.ownerLogin}/{repo.name}
+                          {repo.ownerLogin || username}/{repo.name}
                         </Link>
                         <div className="text-[10px] text-gray-600 font-bold uppercase mt-0.5">{repo.language}</div>
                       </td>
@@ -281,7 +281,7 @@ export default function UserProfile({ username }: { username: string }) {
                 <h4 className="text-white font-bold mb-4">Actual Calculation</h4>
                 {topRepo && (
                   <div className="space-y-4">
-                    <p className="text-sm text-gray-500 italic">Example from your top project: {topRepo.ownerLogin}/{topRepo.name}</p>
+                    <p className="text-sm text-gray-500 italic">Example from your top project: {topRepo.ownerLogin || username}/{topRepo.name}</p>
                     <div className="bg-gray-950 p-6 rounded-md border border-gray-800 font-mono text-sm">
                       <div className="flex justify-between mb-2">
                         <span>Stars:</span>
